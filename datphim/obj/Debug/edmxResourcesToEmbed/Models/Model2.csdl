@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="datphimchuan1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tb_HoaDon">
+    <Key>
+      <PropertyRef Name="Ma_HoaDon" />
+    </Key>
+    <Property Name="Ma_HoaDon" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Ma_LichChieu_PhongChieu" Type="Int64" />
+    <Property Name="GiaTien" Type="Int64" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="ThanhTien" Type="Int64" />
+    <Property Name="Ma_TT" Type="Int64" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <NavigationProperty Name="Tb_LichChieu_PhongChieu" Relationship="Self.FK__Tb_HoaDon__Ma_Li__3A81B327" FromRole="Tb_HoaDon" ToRole="Tb_LichChieu_PhongChieu" />
+    <NavigationProperty Name="Tb_NguoiDung" Relationship="Self.FK__Tb_HoaDon__UserN__398D8EEE" FromRole="Tb_HoaDon" ToRole="Tb_NguoiDung" />
+    <NavigationProperty Name="Tb_Ve" Relationship="Self.FK__Tb_Ve__Ma_HoaDon__3F466844" FromRole="Tb_HoaDon" ToRole="Tb_Ve" />
+    <NavigationProperty Name="Tb_ThanhToan" Relationship="Self.FK_Tb_HoaDon_Tb_ThanhToan" FromRole="Tb_HoaDon" ToRole="Tb_ThanhToan" />
+  </EntityType>
+  <EntityType Name="Tb_LichChieu_PhongChieu">
+    <Key>
+      <PropertyRef Name="Ma_LichChieu_PhongChieu" />
+    </Key>
+    <Property Name="Ma_LichChieu_PhongChieu" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ma_Phim" Type="Int64" />
+    <Property Name="NgayChieu" Type="DateTime" Precision="0" />
+    <Property Name="GioChieu" Type="Time" Precision="7" />
+    <Property Name="Ma_PhongChieu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="available" Type="Boolean" />
+    <NavigationProperty Name="Tb_HoaDon" Relationship="Self.FK__Tb_HoaDon__Ma_Li__3A81B327" FromRole="Tb_LichChieu_PhongChieu" ToRole="Tb_HoaDon" />
+    <NavigationProperty Name="Tb_phim" Relationship="Self.FK__Tb_LichCh__Ma_Ph__33D4B598" FromRole="Tb_LichChieu_PhongChieu" ToRole="Tb_phim" />
+    <NavigationProperty Name="Tb_Phong" Relationship="Self.FK__Tb_LichCh__Ma_Ph__34C8D9D1" FromRole="Tb_LichChieu_PhongChieu" ToRole="Tb_Phong" />
+    <NavigationProperty Name="Tb_Ve" Relationship="Self.FK__Tb_Ve__Ma_LichCh__3D5E1FD2" FromRole="Tb_LichChieu_PhongChieu" ToRole="Tb_Ve" />
+  </EntityType>
+  <EntityType Name="Tb_LoaiGhe">
+    <Key>
+      <PropertyRef Name="Ma_LoaiGhe" />
+    </Key>
+    <Property Name="Ma_LoaiGhe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GiaTien" Type="Int64" />
+    <NavigationProperty Name="Tb_PhongGhe" Relationship="Self.FK__Tb_PhongG__Ma_Lo__300424B4" FromRole="Tb_LoaiGhe" ToRole="Tb_PhongGhe" />
+  </EntityType>
+  <EntityType Name="Tb_NguoiDung">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PassWord" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+    <Property Name="TenKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="available" Type="Boolean" />
+    <NavigationProperty Name="Tb_HoaDon" Relationship="Self.FK__Tb_HoaDon__UserN__398D8EEE" FromRole="Tb_NguoiDung" ToRole="Tb_HoaDon" />
+    <Property Name="Salt" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Tb_PhanLoaiPhim">
+    <Key>
+      <PropertyRef Name="Ma_Loai" />
+    </Key>
+    <Property Name="Ma_Loai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenTiengViet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tb_phim" Relationship="Self.FK__Tb_phim__Ma_Loai__286302EC" FromRole="Tb_PhanLoaiPhim" ToRole="Tb_phim" />
+  </EntityType>
+  <EntityType Name="Tb_phim">
+    <Key>
+      <PropertyRef Name="Ma_Phim" />
+    </Key>
+    <Property Name="Ma_Phim" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenPhim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChatLuong" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Ma_Loai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Ma_TheLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DaoDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DienVien" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="NgayKhoiChieu" Type="DateTime" Precision="0" />
+    <Property Name="ThoiLuong" Type="Int32" />
+    <Property Name="NgonNgu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="AnhBia" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="Trailer" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="available" Type="Boolean" />
+    <NavigationProperty Name="Tb_LichChieu_PhongChieu" Relationship="Self.FK__Tb_LichCh__Ma_Ph__33D4B598" FromRole="Tb_phim" ToRole="Tb_LichChieu_PhongChieu" />
+    <NavigationProperty Name="Tb_PhanLoaiPhim" Relationship="Self.FK__Tb_phim__Ma_Loai__286302EC" FromRole="Tb_phim" ToRole="Tb_PhanLoaiPhim" />
+    <NavigationProperty Name="Tb_TheLoai" Relationship="Self.FK__Tb_phim__Ma_TheL__29572725" FromRole="Tb_phim" ToRole="Tb_TheLoai" />
+  </EntityType>
+  <EntityType Name="Tb_Phong">
+    <Key>
+      <PropertyRef Name="Ma_PhongChieu" />
+    </Key>
+    <Property Name="Ma_PhongChieu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LoaiPhong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuongGhe" Type="Int32" />
+    <NavigationProperty Name="Tb_LichChieu_PhongChieu" Relationship="Self.FK__Tb_LichCh__Ma_Ph__34C8D9D1" FromRole="Tb_Phong" ToRole="Tb_LichChieu_PhongChieu" />
+    <NavigationProperty Name="Tb_PhongGhe" Relationship="Self.FK__Tb_PhongG__Ma_Ph__30F848ED" FromRole="Tb_Phong" ToRole="Tb_PhongGhe" />
+  </EntityType>
+  <EntityType Name="Tb_PhongGhe">
+    <Key>
+      <PropertyRef Name="Ma_PhongGhe" />
+    </Key>
+    <Property Name="Ma_PhongGhe" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ma_PhongChieu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TenGhe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ma_LoaiGhe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tb_LoaiGhe" Relationship="Self.FK__Tb_PhongG__Ma_Lo__300424B4" FromRole="Tb_PhongGhe" ToRole="Tb_LoaiGhe" />
+    <NavigationProperty Name="Tb_Phong" Relationship="Self.FK__Tb_PhongG__Ma_Ph__30F848ED" FromRole="Tb_PhongGhe" ToRole="Tb_Phong" />
+    <NavigationProperty Name="Tb_Ve" Relationship="Self.FK__Tb_Ve__Ma_PhongG__3E52440B" FromRole="Tb_PhongGhe" ToRole="Tb_Ve" />
+  </EntityType>
+  <EntityType Name="Tb_ThanhToan">
+    <Key>
+      <PropertyRef Name="Ma_TT" />
+    </Key>
+    <Property Name="Ma_TT" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTiengViet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenNguoiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tb_HoaDon" Relationship="Self.FK_Tb_HoaDon_Tb_ThanhToan" FromRole="Tb_ThanhToan" ToRole="Tb_HoaDon" />
+  </EntityType>
+  <EntityType Name="Tb_TheLoai">
+    <Key>
+      <PropertyRef Name="Ma_TheLoai" />
+    </Key>
+    <Property Name="Ma_TheLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenTiengViet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tb_phim" Relationship="Self.FK__Tb_phim__Ma_TheL__29572725" FromRole="Tb_TheLoai" ToRole="Tb_phim" />
+  </EntityType>
+  <EntityType Name="Tb_Ve">
+    <Key>
+      <PropertyRef Name="Ma_ve" />
+    </Key>
+    <Property Name="Ma_ve" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ma_HoaDon" Type="Int64" />
+    <Property Name="Ma_LichChieu_PhongChieu" Type="Int64" />
+    <Property Name="Ma_PhongGhe" Type="Int64" />
+    <NavigationProperty Name="Tb_HoaDon" Relationship="Self.FK__Tb_Ve__Ma_HoaDon__3F466844" FromRole="Tb_Ve" ToRole="Tb_HoaDon" />
+    <NavigationProperty Name="Tb_LichChieu_PhongChieu" Relationship="Self.FK__Tb_Ve__Ma_LichCh__3D5E1FD2" FromRole="Tb_Ve" ToRole="Tb_LichChieu_PhongChieu" />
+    <NavigationProperty Name="Tb_PhongGhe" Relationship="Self.FK__Tb_Ve__Ma_PhongG__3E52440B" FromRole="Tb_Ve" ToRole="Tb_PhongGhe" />
+  </EntityType>
+  <Association Name="FK__Tb_HoaDon__Ma_Li__3A81B327">
+    <End Role="Tb_LichChieu_PhongChieu" Type="Self.Tb_LichChieu_PhongChieu" Multiplicity="0..1" />
+    <End Role="Tb_HoaDon" Type="Self.Tb_HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_LichChieu_PhongChieu">
+        <PropertyRef Name="Ma_LichChieu_PhongChieu" />
+      </Principal>
+      <Dependent Role="Tb_HoaDon">
+        <PropertyRef Name="Ma_LichChieu_PhongChieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_HoaDon__UserN__398D8EEE">
+    <End Role="Tb_NguoiDung" Type="Self.Tb_NguoiDung" Multiplicity="0..1" />
+    <End Role="Tb_HoaDon" Type="Self.Tb_HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_NguoiDung">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Tb_HoaDon">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_Ve__Ma_HoaDon__3F466844">
+    <End Role="Tb_HoaDon" Type="Self.Tb_HoaDon" Multiplicity="0..1" />
+    <End Role="Tb_Ve" Type="Self.Tb_Ve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_HoaDon">
+        <PropertyRef Name="Ma_HoaDon" />
+      </Principal>
+      <Dependent Role="Tb_Ve">
+        <PropertyRef Name="Ma_HoaDon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tb_HoaDon_Tb_ThanhToan">
+    <End Role="Tb_ThanhToan" Type="Self.Tb_ThanhToan" Multiplicity="0..1" />
+    <End Role="Tb_HoaDon" Type="Self.Tb_HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_ThanhToan">
+        <PropertyRef Name="Ma_TT" />
+      </Principal>
+      <Dependent Role="Tb_HoaDon">
+        <PropertyRef Name="Ma_TT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_LichCh__Ma_Ph__33D4B598">
+    <End Role="Tb_phim" Type="Self.Tb_phim" Multiplicity="0..1" />
+    <End Role="Tb_LichChieu_PhongChieu" Type="Self.Tb_LichChieu_PhongChieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_phim">
+        <PropertyRef Name="Ma_Phim" />
+      </Principal>
+      <Dependent Role="Tb_LichChieu_PhongChieu">
+        <PropertyRef Name="Ma_Phim" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_LichCh__Ma_Ph__34C8D9D1">
+    <End Role="Tb_Phong" Type="Self.Tb_Phong" Multiplicity="0..1" />
+    <End Role="Tb_LichChieu_PhongChieu" Type="Self.Tb_LichChieu_PhongChieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Phong">
+        <PropertyRef Name="Ma_PhongChieu" />
+      </Principal>
+      <Dependent Role="Tb_LichChieu_PhongChieu">
+        <PropertyRef Name="Ma_PhongChieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_Ve__Ma_LichCh__3D5E1FD2">
+    <End Role="Tb_LichChieu_PhongChieu" Type="Self.Tb_LichChieu_PhongChieu" Multiplicity="0..1" />
+    <End Role="Tb_Ve" Type="Self.Tb_Ve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_LichChieu_PhongChieu">
+        <PropertyRef Name="Ma_LichChieu_PhongChieu" />
+      </Principal>
+      <Dependent Role="Tb_Ve">
+        <PropertyRef Name="Ma_LichChieu_PhongChieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_PhongG__Ma_Lo__300424B4">
+    <End Role="Tb_LoaiGhe" Type="Self.Tb_LoaiGhe" Multiplicity="0..1" />
+    <End Role="Tb_PhongGhe" Type="Self.Tb_PhongGhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_LoaiGhe">
+        <PropertyRef Name="Ma_LoaiGhe" />
+      </Principal>
+      <Dependent Role="Tb_PhongGhe">
+        <PropertyRef Name="Ma_LoaiGhe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_phim__Ma_Loai__286302EC">
+    <End Role="Tb_PhanLoaiPhim" Type="Self.Tb_PhanLoaiPhim" Multiplicity="0..1" />
+    <End Role="Tb_phim" Type="Self.Tb_phim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_PhanLoaiPhim">
+        <PropertyRef Name="Ma_Loai" />
+      </Principal>
+      <Dependent Role="Tb_phim">
+        <PropertyRef Name="Ma_Loai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_phim__Ma_TheL__29572725">
+    <End Role="Tb_TheLoai" Type="Self.Tb_TheLoai" Multiplicity="0..1" />
+    <End Role="Tb_phim" Type="Self.Tb_phim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_TheLoai">
+        <PropertyRef Name="Ma_TheLoai" />
+      </Principal>
+      <Dependent Role="Tb_phim">
+        <PropertyRef Name="Ma_TheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_PhongG__Ma_Ph__30F848ED">
+    <End Role="Tb_Phong" Type="Self.Tb_Phong" Multiplicity="0..1" />
+    <End Role="Tb_PhongGhe" Type="Self.Tb_PhongGhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Phong">
+        <PropertyRef Name="Ma_PhongChieu" />
+      </Principal>
+      <Dependent Role="Tb_PhongGhe">
+        <PropertyRef Name="Ma_PhongChieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tb_Ve__Ma_PhongG__3E52440B">
+    <End Role="Tb_PhongGhe" Type="Self.Tb_PhongGhe" Multiplicity="0..1" />
+    <End Role="Tb_Ve" Type="Self.Tb_Ve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_PhongGhe">
+        <PropertyRef Name="Ma_PhongGhe" />
+      </Principal>
+      <Dependent Role="Tb_Ve">
+        <PropertyRef Name="Ma_PhongGhe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="datphimchuan1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tb_HoaDon" EntityType="Self.Tb_HoaDon" />
+    <EntitySet Name="Tb_LichChieu_PhongChieu" EntityType="Self.Tb_LichChieu_PhongChieu" />
+    <EntitySet Name="Tb_LoaiGhe" EntityType="Self.Tb_LoaiGhe" />
+    <EntitySet Name="Tb_NguoiDung" EntityType="Self.Tb_NguoiDung" />
+    <EntitySet Name="Tb_PhanLoaiPhim" EntityType="Self.Tb_PhanLoaiPhim" />
+    <EntitySet Name="Tb_phim" EntityType="Self.Tb_phim" />
+    <EntitySet Name="Tb_Phong" EntityType="Self.Tb_Phong" />
+    <EntitySet Name="Tb_PhongGhe" EntityType="Self.Tb_PhongGhe" />
+    <EntitySet Name="Tb_ThanhToan" EntityType="Self.Tb_ThanhToan" />
+    <EntitySet Name="Tb_TheLoai" EntityType="Self.Tb_TheLoai" />
+    <EntitySet Name="Tb_Ve" EntityType="Self.Tb_Ve" />
+    <AssociationSet Name="FK__Tb_HoaDon__Ma_Li__3A81B327" Association="Self.FK__Tb_HoaDon__Ma_Li__3A81B327">
+      <End Role="Tb_LichChieu_PhongChieu" EntitySet="Tb_LichChieu_PhongChieu" />
+      <End Role="Tb_HoaDon" EntitySet="Tb_HoaDon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_HoaDon__UserN__398D8EEE" Association="Self.FK__Tb_HoaDon__UserN__398D8EEE">
+      <End Role="Tb_NguoiDung" EntitySet="Tb_NguoiDung" />
+      <End Role="Tb_HoaDon" EntitySet="Tb_HoaDon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_Ve__Ma_HoaDon__3F466844" Association="Self.FK__Tb_Ve__Ma_HoaDon__3F466844">
+      <End Role="Tb_HoaDon" EntitySet="Tb_HoaDon" />
+      <End Role="Tb_Ve" EntitySet="Tb_Ve" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tb_HoaDon_Tb_ThanhToan" Association="Self.FK_Tb_HoaDon_Tb_ThanhToan">
+      <End Role="Tb_ThanhToan" EntitySet="Tb_ThanhToan" />
+      <End Role="Tb_HoaDon" EntitySet="Tb_HoaDon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_LichCh__Ma_Ph__33D4B598" Association="Self.FK__Tb_LichCh__Ma_Ph__33D4B598">
+      <End Role="Tb_phim" EntitySet="Tb_phim" />
+      <End Role="Tb_LichChieu_PhongChieu" EntitySet="Tb_LichChieu_PhongChieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_LichCh__Ma_Ph__34C8D9D1" Association="Self.FK__Tb_LichCh__Ma_Ph__34C8D9D1">
+      <End Role="Tb_Phong" EntitySet="Tb_Phong" />
+      <End Role="Tb_LichChieu_PhongChieu" EntitySet="Tb_LichChieu_PhongChieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_Ve__Ma_LichCh__3D5E1FD2" Association="Self.FK__Tb_Ve__Ma_LichCh__3D5E1FD2">
+      <End Role="Tb_LichChieu_PhongChieu" EntitySet="Tb_LichChieu_PhongChieu" />
+      <End Role="Tb_Ve" EntitySet="Tb_Ve" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_PhongG__Ma_Lo__300424B4" Association="Self.FK__Tb_PhongG__Ma_Lo__300424B4">
+      <End Role="Tb_LoaiGhe" EntitySet="Tb_LoaiGhe" />
+      <End Role="Tb_PhongGhe" EntitySet="Tb_PhongGhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_phim__Ma_Loai__286302EC" Association="Self.FK__Tb_phim__Ma_Loai__286302EC">
+      <End Role="Tb_PhanLoaiPhim" EntitySet="Tb_PhanLoaiPhim" />
+      <End Role="Tb_phim" EntitySet="Tb_phim" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_phim__Ma_TheL__29572725" Association="Self.FK__Tb_phim__Ma_TheL__29572725">
+      <End Role="Tb_TheLoai" EntitySet="Tb_TheLoai" />
+      <End Role="Tb_phim" EntitySet="Tb_phim" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_PhongG__Ma_Ph__30F848ED" Association="Self.FK__Tb_PhongG__Ma_Ph__30F848ED">
+      <End Role="Tb_Phong" EntitySet="Tb_Phong" />
+      <End Role="Tb_PhongGhe" EntitySet="Tb_PhongGhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tb_Ve__Ma_PhongG__3E52440B" Association="Self.FK__Tb_Ve__Ma_PhongG__3E52440B">
+      <End Role="Tb_PhongGhe" EntitySet="Tb_PhongGhe" />
+      <End Role="Tb_Ve" EntitySet="Tb_Ve" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

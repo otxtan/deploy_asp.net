@@ -1,0 +1,146 @@
+﻿/*.header {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 8%;
+    align-items: center;
+    border-bottom: 1px solid rgb(226, 222, 222);
+    background-color: white;
+    white-space: nowrap;*/
+/* margin-top: 20px; */
+/*}*/
+
+.header .logo img {
+    width: 131px;
+    height: 55pX;
+}
+
+.header .menu {
+    /* flex: 2; */
+    margin-top: 20px;
+}
+
+    .header .menu a:hover {
+        color: #b1cb5c;
+    }
+
+.header .menu__list {
+    display: flex;
+    list-style: none;
+    margin-left: 25px;
+}
+
+.header .menu__list-item {
+    padding: 0px 20px;
+}
+
+    .header .menu__list-item a {
+        color: #171515;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+/*@media only screen and (max-width: 480px) and (min-width: 320px) {
+    .header .menu__list {
+        width: 200px;
+    }
+}*/
+
+
+.footer {
+    /* margin-left: 12%; */
+    /* text-decoration: none; */
+    border-top: 3px solid #ddd;
+    width: 100%;
+}
+
+footer {
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.footer a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.footerimg img {
+    width: 108px;
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+.footerimg2 img {
+    width: 160px;
+    height: 68px;
+    margin-bottom: 10px;
+}
+/* Áp dụng CSS khác cho màn hình có độ rộng nhỏ hơn hoặc bằng 600px */
+@media (max-width: 749px) {
+    .header {
+        width: 100%;
+        height: auto;
+        padding: 20px 8%;
+        /*align-items: center;
+        justify-content: space-between;
+        white-space: nowrap;*/
+        border-bottom: 1px solid rgb(226, 222, 222);
+        background-color: white;
+        /* margin-top: 20px; */
+    }
+
+    .header-head {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+    .header .menu__list {
+        display: block;
+        list-style: none;
+        /* margin-left: 25px; */
+        text-align: end;
+    }
+
+    .header .menu__list-item a {
+        color: #171515;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1em;
+    }
+
+    .header .menu__list-item {
+        padding: 5px 0px;
+    }
+
+    #btn-menu {
+        display: block;
+    }
+}
+
+/* Áp dụng CSS khác cho màn hình có độ rộng lớn hơn 600px */
+@media (min-width: 750px) {
+    .header {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .header-head {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 50px;
+    }
+
+    #btn-menu {
+        display: none;
+    }
+
+    #demo {
+        display: block;
+    }
+}
