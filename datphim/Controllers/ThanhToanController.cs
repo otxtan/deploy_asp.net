@@ -89,10 +89,8 @@ namespace datphim.Controllers
             Tb_HoaDon tb_HoaDon = new Tb_HoaDon();
             string user = Session["UserName"].ToString();
 
-            //string[] tenChoNgoi=null;
-            /*string ngaychieu = "";*/
             long maHD = 0;
-            /*string giochieu = "";*/
+
             if (TempData.ContainsKey("Ma_LichChieu_PhongChieu") && TempData.ContainsKey("Ma_PhongChieu"))
             {
                 Ma_LichChieu_PhongChieu1 = TempData["Ma_LichChieu_PhongChieu"].ToString();
